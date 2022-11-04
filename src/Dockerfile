@@ -1,5 +1,5 @@
 FROM eclipse-temurin:11-jre-alpine
-MAINTAINER adrian@gilbert.ca
+LABEL MAINTAINER=adrian@gilbert.ca
 
 EXPOSE 8080
 
