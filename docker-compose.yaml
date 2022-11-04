@@ -1,0 +1,28 @@
+version: "3.6"
+
+volumes:
+  jetty_static:
+    driver: local
+    driver_opts:
+      type: "nfs4"
+      o: "addr=192.168.1.37,rsize=65536,wsize=65536,timeo=14,tcp,rw,noatime"
+      device: ":/volume1/PodGeneral/jetty/static_content"  
+
+services:
+  jetty:
+    image: registry.stapledon.local:5000/jetty-static:0.9.1
+    container_name: comics-ui
+    hostname: comics-ui
+    pull_policy: always
+    restart: always    
+    ports:
+      - 8899:8080      
+    volumes:
+      - type: volume
+        source: jetty_static
+        target: /static_content        
+
+networks: 
+  default: 
+    external: 
+      name: stapledon-network
